@@ -6,22 +6,27 @@ import 'package:flame/sprite.dart';
 class Ground extends Component {
 
   Rect rect;
-  double groundSize;
+  static double groundSize;
   Sprite sprite = Sprite("bg/ground.png");
 
   Size size;
 
-  double groundInitialPositionX;
-  double groundInitialPositionY;
+  double groundPositionX;
+  double index;
+  double groundPositionY;
 
-  double newPositionX;
 
-  Ground(this.size){
+  Ground(this.size, this.index){
 
     groundSize = size.width / size.height * 30;
-    print(groundSize);
 
-    rect = Rect.fromLTWH(groundInitialPositionX, size.height - groundSize, groundSize, groundSize);
+    groundPositionX = (size.width / size.height * 30) * index;
+
+    //print("POSIÇÃO X: $groundPositionX");
+
+    groundPositionY = size.height - groundSize;
+
+    rect = Rect.fromLTWH(groundPositionX, groundPositionY, groundSize, groundSize);
 
   }
 

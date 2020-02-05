@@ -26,7 +26,9 @@ class Player extends Component {
   Player(this.size){
 
     playerInitialPositionX = size.width / 9;
-    playerInitialPositionY = size.height / 1.4;
+    playerInitialPositionY = size.height - (size.width / size.height) * 30 - 48;
+
+    print(playerInitialPositionY);
 
   rect = Rect.fromLTWH(playerInitialPositionX, playerInitialPositionY, playerSize, playerSize);
   animation = Animation.spriteList(idleSprites, stepTime: 0.4, loop: true);

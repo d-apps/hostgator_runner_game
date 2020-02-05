@@ -13,14 +13,16 @@ class Game extends BaseGame {
 
   Game(this.size){
 
-    print(size.height);
-    print(size.width);
+    //print(size.height);
+    //print(size.width);
 
     add(new Background(size.height, size.width, Sprite("bg/bg-1.png")));
     add(new Background(size.height, size.width, Sprite("bg/bg-2.png")));
     add(new Background(size.height, size.width, Sprite("bg/bg-3.png")));
 
-    add(new Ground(size));
+    for(int i = 0; i < size.width; i++){
+      add(new Ground(size, i.toDouble()));
+    }
 
     add(new Player(size));
 
