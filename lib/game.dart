@@ -21,10 +21,11 @@ class Game extends BaseGame {
     add(new Background(size, Sprite("bg/bg-3.png")));
 
     for(int i = 0; i < size.width; i++){
-      add(new Ground(size, i.toDouble()));
+      add(new Ground(i.toDouble()));
     }
 
-    add(new Player(size));
+
+    add(new Player());
 
   }
 
