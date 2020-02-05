@@ -15,10 +15,14 @@ void main() async{
 
   await Flame.images.loadAll([
 
-    "bg-1.png",
-    "bg-2.png",
-    "bg-3.png",
-    "player-idle.png",
+    "bg/bg-1.png",
+    "bg/bg-2.png",
+    "bg/bg-3.png",
+    "bg/ground.png",
+    "player/player-idle-0.png",
+    "player/player-idle-1.png",
+    "player/player-idle-2.png",
+    "player/player-idle-3.png",
 
   ]);
 

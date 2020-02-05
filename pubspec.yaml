@@ -47,10 +47,14 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/images/bg-1.png
-    - assets/images/bg-2.png
-    - assets/images/bg-3.png
-    - assets/images/player-idle.png
+    - assets/images/bg/bg-1.png
+    - assets/images/bg/bg-2.png
+    - assets/images/bg/bg-3.png
+    - assets/images/bg/ground.png
+    - assets/images/player/player-idle-0.png
+    - assets/images/player/player-idle-1.png
+    - assets/images/player/player-idle-2.png
+    - assets/images/player/player-idle-3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

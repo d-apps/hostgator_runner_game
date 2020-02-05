@@ -3,15 +3,16 @@ import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
 
-class BackgroundComponent extends Component {
+class Background extends Component {
 
   final height;
   final width;
 
   Sprite sprite;
   SpriteComponent backgroundComponent;
+  Rect rect;
 
-  BackgroundComponent(this.width, this.height, this.sprite){
+  Background(this.height, this.width, this.sprite){
 
     backgroundComponent = SpriteComponent.fromSprite(width, height, sprite);
 
