@@ -16,9 +16,9 @@ class Game extends BaseGame {
     //print(size.height);
     //print(size.width);
 
-    add(new Background(size.height, size.width, Sprite("bg/bg-1.png")));
-    add(new Background(size.height, size.width, Sprite("bg/bg-2.png")));
-    add(new Background(size.height, size.width, Sprite("bg/bg-3.png")));
+    add(new Background(size, Sprite("bg/bg-1.png")));
+    add(new Background(size, Sprite("bg/bg-2.png")));
+    add(new Background(size, Sprite("bg/bg-3.png")));
 
     for(int i = 0; i < size.width; i++){
       add(new Ground(size, i.toDouble()));

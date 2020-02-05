@@ -5,25 +5,25 @@ import 'package:flame/sprite.dart';
 
 class Background extends Component {
 
-  final height;
-  final width;
+  Size size;
 
   Sprite sprite;
-  SpriteComponent backgroundComponent;
-  Rect rect;
+  Rect bgRect;
 
-  Background(this.height, this.width, this.sprite){
 
-    backgroundComponent = SpriteComponent.fromSprite(width, height, sprite);
+  Background(this.size, this.sprite){
+
+    bgRect = Rect.fromLTWH(0, 0, size.width, size.height);
+
 
   }
 
   void render(Canvas canvas){
-      backgroundComponent.render(canvas);
+    sprite.renderRect(canvas, bgRect);
   }
 
   void update(double dt){
-
+    bgRect = bgRect.translate(10 * dt, 0);
   }
 
 }
