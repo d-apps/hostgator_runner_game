@@ -3,12 +3,17 @@ import 'dart:ui';
 import 'package:flame/animation.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
+import 'package:hostgator_runner_game/game.dart';
+import 'package:hostgator_runner_game/game_state.dart';
 
 
 class Player extends Component {
 
   Size size;
   Animation animation;
+  Animation idleAnimation;
+  Animation runAnimation;
+
   final List<Sprite> idleSprites = [
 
     Sprite("player/player-idle-0.png"),
@@ -18,9 +23,23 @@ class Player extends Component {
 
   ];
 
+  final List<Sprite> runSprites = [
 
+    Sprite("player/player-run-0.png"),
+    Sprite("player/player-run-1.png"),
+    Sprite("player/player-run-2.png"),
+    Sprite("player/player-run-3.png"),
+    Sprite("player/player-run-4.png"),
+    Sprite("player/player-run-5.png"),
+    Sprite("player/player-run-4.png"),
+    Sprite("player/player-run-3.png"),
+    Sprite("player/player-run-2.png"),
+    Sprite("player/player-run-1.png"),
+    Sprite("player/player-run-0.png"),
 
-  static const double playerSize = 48;
+  ];
+
+  static const double playerSize = 64;
   Rect rect;
   static double playerInitialPositionX;
   static double playerInitialPositionY;
@@ -30,12 +49,16 @@ class Player extends Component {
     playerInitialPositionX = size.width / 9;
     playerInitialPositionY = size.height - (size.width / size.height) * 30 - 48;
 
-    print(size.height );
-    print(size.width / size.height);
-    print(size.height - (size.width / size.height) * 30);
+    //print(size.height );
+    //print(size.width / size.height);
+    //print(size.height - (size.width / size.height) * 30);
 
   rect = Rect.fromLTWH(playerInitialPositionX, playerInitialPositionY, playerSize, playerSize);
-  animation = Animation.spriteList(idleSprites, stepTime: 0.4, loop: true);
+
+  idleAnimation = Animation.spriteList(idleSprites, stepTime: 0.4, loop: true);
+  runAnimation = Animation.spriteList(runSprites, stepTime: 0.03, loop: true);
+
+  animation = idleAnimation;
 
   }
 
@@ -45,7 +68,20 @@ class Player extends Component {
   }
 
   void update(double dt){
+
     animation.update(dt);
+
+    animation = idleAnimation;
+
+    if(Game.gameState == GameState.IDLE){
+
+    } else if(Game.gameState == GameState.STARTED){
+
+      animation = runAnimation;
+
+    }
+
+
   }
 
 }

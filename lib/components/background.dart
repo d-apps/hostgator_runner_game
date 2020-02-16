@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
+import 'package:hostgator_runner_game/game.dart';
+import 'package:hostgator_runner_game/game_state.dart';
 
 class Background extends Component {
 
@@ -29,6 +31,7 @@ class Background extends Component {
 
   void update(double dt){
 
+    if(Game.gameState == GameState.STARTED){
 
       for(int i = 0; i < backgrounds.length; i++){
 
@@ -50,6 +53,8 @@ class Background extends Component {
       }
 
       print("LENGTH: ${backgrounds.length}");
+
+    }
 
 
     }

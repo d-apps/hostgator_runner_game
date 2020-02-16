@@ -55,6 +55,13 @@ flutter:
     - assets/images/player/player-idle-1.png
     - assets/images/player/player-idle-2.png
     - assets/images/player/player-idle-3.png
+    - assets/images/player/player-idle.png
+    - assets/images/player/player-run-0.png
+    - assets/images/player/player-run-1.png
+    - assets/images/player/player-run-2.png
+    - assets/images/player/player-run-3.png
+    - assets/images/player/player-run-4.png
+    - assets/images/player/player-run-5.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

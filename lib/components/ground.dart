@@ -2,12 +2,15 @@ import 'dart:ui';
 
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
+import 'package:hostgator_runner_game/game.dart';
+import 'package:hostgator_runner_game/game_state.dart';
 
 class Ground extends Component {
 
   Rect rect;
   static double groundSize;
   Sprite sprite = Sprite("bg/ground.png");
+  double speed = -70;
 
   Size size;
 
@@ -21,6 +24,8 @@ class Ground extends Component {
     groundSize = size.width / size.height * 30;
 
     groundPositionX = (size.width / size.height * 30) * index;
+
+    //print("POSIÇÃO X: $groundPositionX");
 
     groundPositionY = size.height - groundSize;
 
@@ -36,6 +41,11 @@ class Ground extends Component {
   @override
   void update(double t) {
 
+    if(Game.gameState == GameState.STARTED){
+
+      rect = rect.translate( speed * t, 0);
+
+    }
   }
 
 
