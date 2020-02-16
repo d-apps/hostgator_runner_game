@@ -22,8 +22,6 @@ class Ground extends Component {
 
     groundPositionX = (size.width / size.height * 30) * index;
 
-    //print("POSIÇÃO X: $groundPositionX");
-
     groundPositionY = size.height - groundSize;
 
     rect = Rect.fromLTWH(groundPositionX, groundPositionY, groundSize, groundSize);

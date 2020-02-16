@@ -18,6 +18,8 @@ class Player extends Component {
 
   ];
 
+
+
   static const double playerSize = 48;
   Rect rect;
   static double playerInitialPositionX;
@@ -28,7 +30,9 @@ class Player extends Component {
     playerInitialPositionX = size.width / 9;
     playerInitialPositionY = size.height - (size.width / size.height) * 30 - 48;
 
-    //print(playerInitialPositionY);
+    print(size.height );
+    print(size.width / size.height);
+    print(size.height - (size.width / size.height) * 30);
 
   rect = Rect.fromLTWH(playerInitialPositionX, playerInitialPositionY, playerSize, playerSize);
   animation = Animation.spriteList(idleSprites, stepTime: 0.4, loop: true);

@@ -15,9 +15,9 @@ void main() async{
 
   await Flame.images.loadAll([
 
-    "bg/bg-1.png",
-    "bg/bg-2.png",
-    "bg/bg-3.png",
+    "bg/bg-clouds.png",
+    "bg/bg-city-far.png",
+    "bg/bg-city.png",
     "bg/ground.png",
     "player/player-idle-0.png",
     "player/player-idle-1.png",

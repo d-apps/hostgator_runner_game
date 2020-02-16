@@ -8,51 +8,64 @@ class Background extends Component {
   Size size;
   Sprite sprite;
   int speed;
-  List<Rect> rects = [];
+  List<Rect> backgrounds;
 
   Background({this.size, this.sprite, this.speed}){
 
-    rects.add(Rect.fromLTWH(0, 0, size.width, size.height));
-    rects.add(Rect.fromLTWH(size.width, 0, size.width +1, size.height));
+    backgrounds = [];
+    backgrounds.add(Rect.fromLTWH(0, 0, size.width, size.height));
+    backgrounds.add(Rect.fromLTWH(size.width, 0, size.width, size.height));
 
   }
 
   void render(Canvas canvas){
 
-    rects.forEach((rect) {
+    backgrounds.forEach((rect) {
       sprite.renderRect(canvas, rect);
     });
+
 
   }
 
   void update(double dt){
 
-    if(rects.isNotEmpty){
 
-      for(int i =0; i < rects.length; i++){
-        rects[i] = rects[i].translate(speed * dt, 0);
+      for(int i = 0; i < backgrounds.length; i++){
 
-        if(rects[i].right <= -1){
+        // Move background
+        backgrounds[i] = backgrounds[i].translate(speed * dt, 0);
 
-          // Adiciona o background na lista
-          rects.add(Rect.fromLTWH(size.width + 1, 0, size.width +1, size.height));
+        //print("LEFT: ${backgrounds[i].left.toInt()}");
+        print("RIGHT: ${backgrounds[i].right.toInt()}");
 
+
+        if(backgrounds[i].right.toInt() == size.width + 10){
+          addBackground();
         }
 
-        if(rects[i].right <= -1){
-
-          // Remove o background da lista ao sair da tela
-          rects.remove(rects[i]);
-
+        if(backgrounds[i].right.toInt() <= -1){
+          removeBackground(i);
         }
-
 
       }
 
+      print("LENGTH: ${backgrounds.length}");
 
 
     }
 
-  }
+    void addBackground(){
 
-}
+      print("ADICIONOU BACKGROUND!");
+
+      backgrounds.add(Rect.fromLTWH(size.width + 10.0, 0, size.width, size.height));
+
+    }
+
+    void removeBackground(int i){
+      backgrounds.removeAt(i);
+      print("REMOVEU O BACKGROUND: $i");
+
+    }
+
+  }
