@@ -30,11 +30,7 @@ class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
   void onTap() {
     super.onTap();
 
-    if(gameState == GameState.IDLE){
-      gameState = GameState.STARTED;
-    } else {
-      gameState = GameState.IDLE;
-    }
+
 
   }
 
