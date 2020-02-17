@@ -79,6 +79,8 @@ class Player extends Component {
 
       animation = runAnimation;
 
+    } else {
+      animation = idleAnimation;
     }
 
 

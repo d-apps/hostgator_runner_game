@@ -1,7 +1,6 @@
 
 import 'package:flame/game.dart';
 import 'package:flame/gestures.dart';
-import 'package:flame/sprite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hostgator_runner_game/components/background.dart';
@@ -17,9 +16,7 @@ class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
 
   Game(this.size){
 
-    //add(Background(size: size, sprite: Sprite("bg/bg-clouds.png"), speed: -50));
-    //add(Background(size: size, sprite: Sprite("bg/bg-city-far.png"), speed: -70));
-    add(Background(size: size, sprite: Sprite("bg/bg-city.png"), speed: -70));
+    add(Background());
 
     for(int i = 0; i < size.width; i++){
       add(Ground(size, i.toDouble()));
@@ -33,7 +30,11 @@ class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
   void onTap() {
     super.onTap();
 
-    gameState = GameState.STARTED;
+    if(gameState == GameState.IDLE){
+      gameState = GameState.STARTED;
+    } else {
+      gameState = GameState.IDLE;
+    }
 
   }
 

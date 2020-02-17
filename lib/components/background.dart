@@ -1,76 +1,45 @@
 import 'dart:ui';
 
-import 'package:flame/components/component.dart';
-import 'package:flame/sprite.dart';
+import 'package:flame/components/parallax_component.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hostgator_runner_game/game.dart';
 import 'package:hostgator_runner_game/game_state.dart';
 
-class Background extends Component {
+class Background extends ParallaxComponent{
 
-  Size size;
-  Sprite sprite;
-  int speed;
-  List<Rect> backgrounds;
+  ParallaxComponent parallaxComponent;
 
-  Background({this.size, this.sprite, this.speed}){
+  Background() : super(
+      [
 
-    backgrounds = [];
-    backgrounds.add(Rect.fromLTWH(0, 0, size.width, size.height));
-    backgrounds.add(Rect.fromLTWH(size.width, 0, size.width, size.height));
+        ParallaxImage("bg/bg-clouds.png",),
+        ParallaxImage("bg/bg-city-far.png"),
+        ParallaxImage("bg/bg-city.png"),
 
-  }
+      ],
+      baseSpeed: Offset(0, 0),
+      layerDelta: Offset(0, 0)
+  );
 
-  void render(Canvas canvas){
+  @override
+  void update(double t) {
 
-    backgrounds.forEach((rect) {
-      sprite.renderRect(canvas, rect);
-    });
-
-
-  }
-
-  void update(double dt){
+    super.update(t);
 
     if(Game.gameState == GameState.STARTED){
 
-      for(int i = 0; i < backgrounds.length; i++){
+         baseSpeed = Offset(50, 0);
+         layerDelta = Offset(20, 0);
 
-        // Move background
-        backgrounds[i] = backgrounds[i].translate(speed * dt, 0);
-
-        //print("LEFT: ${backgrounds[i].left.toInt()}");
-        print("RIGHT: ${backgrounds[i].right.toInt()}");
-
-
-        if(backgrounds[i].right.toInt() == size.width + 10){
-          addBackground();
-        }
-
-        if(backgrounds[i].right.toInt() <= -1){
-          removeBackground(i);
-        }
-
-      }
-
-      print("LENGTH: ${backgrounds.length}");
-
+    } else {
+      baseSpeed = Offset(0, 0);
+      layerDelta = Offset(0, 0);
     }
 
-
-    }
-
-    void addBackground(){
-
-      print("ADICIONOU BACKGROUND!");
-
-      backgrounds.add(Rect.fromLTWH(size.width + 10.0, 0, size.width, size.height));
-
-    }
-
-    void removeBackground(int i){
-      backgrounds.removeAt(i);
-      print("REMOVEU O BACKGROUND: $i");
-
-    }
 
   }
+
+}
+
+
+
