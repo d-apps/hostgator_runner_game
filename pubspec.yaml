@@ -51,7 +51,10 @@ flutter:
     - assets/images/bg/bg-city-far.png
     - assets/images/bg/bg-city.png
     - assets/images/bg/ground.png
+    - assets/images/player/player-hurt.png
     - assets/images/player/player-idle.png
+    - assets/images/player/player-jump.png
+    - assets/images/player/player-run.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

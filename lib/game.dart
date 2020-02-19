@@ -10,25 +10,40 @@ import 'package:hostgator_runner_game/game_state.dart';
 
 class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
 
-  final Size size;
+  Size size;
+  Player player;
+  Background background;
+  Ground ground;
 
   static GameState gameState = GameState.IDLE;
 
   Game(this.size){
 
-    add(Background());
+    background = Background();
+    add(background);
 
-    for(int i = 0; i < size.width; i++){
-      add(Ground(size, i.toDouble()));
-    }
+    //for(int i = 0; i < size.width; i++){
+    //  add( ground = Ground(size, i.toDouble()));
+    //}
 
-    add(Player(size));
+    player = Player(size);
+    add(player);
 
   }
 
   @override
   void onTap() {
     super.onTap();
+
+    if(gameState == GameState.IDLE){
+      gameState = GameState.STARTED;
+      player.run();
+    }
+
+
+    //if(gameState == GameState.STARTED && player.toRect().overlaps()){
+    //  player.jump();
+    //}
 
 
 

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flame/components/parallax_component.dart';
+import 'package:hostgator_runner_game/game.dart';
+import 'package:hostgator_runner_game/game_state.dart';
 
 class Background extends ParallaxComponent{
 
@@ -15,7 +17,7 @@ class Background extends ParallaxComponent{
 
       ],
       baseSpeed: Offset(0, 0),
-      layerDelta: Offset(0, 0)
+      layerDelta: Offset(0, 0),
   );
 
   @override
@@ -23,7 +25,13 @@ class Background extends ParallaxComponent{
 
     super.update(t);
 
-
+    if(Game.gameState == GameState.IDLE){
+      baseSpeed = Offset(0, 0);
+      layerDelta = Offset(0, 0);
+    } else {
+      baseSpeed = Offset(50, 0);
+      layerDelta = Offset(20, 0);
+    }
 
   }
 
