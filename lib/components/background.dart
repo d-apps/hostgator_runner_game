@@ -1,37 +1,50 @@
 import 'dart:ui';
 
-import 'package:flame/components/parallax_component.dart';
-import 'package:hostgator_runner_game/game.dart';
-import 'package:hostgator_runner_game/game_state.dart';
+import 'package:flame_scrolling_sprite/flame_scrolling_sprite.dart';
 
-class Background extends ParallaxComponent{
+class Background extends ScrollingSpriteComponent{
+
+  final String spritePath;
+  Size size;
+  double currentSpeed;
+  double speed;
 
   //Start 40, 20
+  Background({this.spritePath, this.size, this.speed, this.currentSpeed}){
 
-  Background({List<ParallaxImage> images,}) : super(
-      [
+    x = 0;
+    y = 0;
+    scrollingSprite = ScrollingSprite(
+      spritePath: spritePath,
+      spriteDestHeight: size.height,
+      spriteDestWidth: size.width,
+      horizontalSpeed: currentSpeed,
+    );
 
-        ParallaxImage("bg/bg-clouds.png",),
-        ParallaxImage("bg/bg-city-far.png"),
-        ParallaxImage("bg/bg-city.png"),
-
-      ],
-      baseSpeed: Offset(0, 0),
-      layerDelta: Offset(0, 0),
-  );
+  }
 
   @override
   void update(double t) {
+    scrollingSprite.update(t);
 
     super.update(t);
 
-    if(Game.gameState == GameState.IDLE){
-      baseSpeed = Offset(0, 0);
-      layerDelta = Offset(0, 0);
-    } else {
-      baseSpeed = Offset(50, 0);
-      layerDelta = Offset(20, 0);
-    }
+  }
+
+  void move(){
+
+    currentSpeed = speed;
+
+    scrollingSprite = ScrollingSprite(
+      spritePath: spritePath,
+      spriteDestHeight: size.height,
+      spriteDestWidth: size.width,
+      horizontalSpeed: currentSpeed,
+    );
+
+  }
+
+  void stop(){
 
   }
 

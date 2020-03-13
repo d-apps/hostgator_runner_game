@@ -85,6 +85,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.18.1"
+  flame_scrolling_sprite:
+    dependency: "direct main"
+    description:
+      name: flame_scrolling_sprite
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   flare_dart:
     dependency: transitive
     description:
@@ -177,13 +184,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.6.0"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.8.0+1"
   petitparser:
     dependency: transitive
     description:
@@ -258,7 +258,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.11"
+    version: "0.2.15"
   tiled:
     dependency: transitive
     description:

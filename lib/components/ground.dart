@@ -1,53 +1,45 @@
 import 'dart:ui';
 
-import 'package:flame/components/component.dart';
-import 'package:flame/sprite.dart';
-import 'package:hostgator_runner_game/game.dart';
-import 'package:hostgator_runner_game/game_state.dart';
+import 'package:flame_scrolling_sprite/flame_scrolling_sprite.dart';
+import 'package:hostgator_runner_game/config.dart';
 
-class Ground extends Component {
-
-  Rect rect;
-  static double groundSize;
-  Sprite sprite = Sprite("bg/ground.png");
-  double speed = -70;
+class Ground extends ScrollingSpriteComponent {
 
   Size size;
+  double counter;
+  double currentSpeed;
+  double speed;
 
-  double groundPositionX;
-  double index;
-  double groundPositionY;
+  Ground({this.size, this.counter, this.currentSpeed, this.speed}){
 
-
-  Ground(this.size, this.index){
-
-    groundSize = size.width / size.height * 30;
-
-    groundPositionX = (size.width / size.height * 30) * index;
-
-    //print("POSIÇÃO X: $groundPositionX");
-
-    groundPositionY = size.height - groundSize;
-
-    rect = Rect.fromLTWH(groundPositionX, groundPositionY, groundSize, groundSize);
+    x = Config.GROUND_WIDTH * counter;
+    y = size.height - Config.GROUND_HEIGHT;
+    scrollingSprite = ScrollingSprite(
+      spritePath: "bg/ground.png",
+      spriteDestHeight: Config.GROUND_HEIGHT,
+      spriteDestWidth: Config.GROUND_WIDTH,
+      horizontalSpeed: currentSpeed,
+    );
 
   }
 
   @override
-  void render(Canvas c) {
-    sprite.renderRect(c, rect);
+  void update(double dt) {
+      scrollingSprite.update(dt);
   }
 
-  @override
-  void update(double t) {
+  void move(){
 
-    if(Game.gameState == GameState.STARTED){
+    currentSpeed = speed;
 
-      rect = rect.translate( speed * t, 0);
+    scrollingSprite = ScrollingSprite(
+      spritePath: "bg/ground.png",
+      spriteDestHeight: Config.GROUND_HEIGHT,
+      spriteDestWidth: Config.GROUND_WIDTH,
+      horizontalSpeed: currentSpeed,
+    );
 
-    }
   }
-
 
 
 }

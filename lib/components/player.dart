@@ -12,11 +12,13 @@ class Player extends AnimationComponent {
   ){
 
     x = size.width / 9;
-    y = size.height - (size.width / size.height) * 30 - 54;
+    y = size.height -118;
 
   }
 
   void idle(){
+
+    print("CORRENDO!");
 
     animation = Animation.sequenced("player/player-idle.png", 4, textureWidth: 64, textureHeight: 64, stepTime: 0.40);
 
@@ -30,11 +32,15 @@ class Player extends AnimationComponent {
 
   void jump(){
 
-    animation = Animation.sequenced("player/player-jump.png", 2, textureWidth: 64, textureHeight: 64, stepTime: 0.40);
+    print("PULOU!!");
 
+    //animation = Animation.sequenced("player/player-jump.png", 2, textureWidth: 64, textureHeight: 64, stepTime: 0.40);
+    //this.toRect().translate(0, size.height - 118);
   }
 
   void hurt(){
+
+    print("MORREU!!");
 
     animation = Animation.sequenced("player/player-hurt.png", 2, textureWidth: 64, textureHeight: 64, stepTime: 0.40);
 
