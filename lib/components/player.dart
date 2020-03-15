@@ -11,7 +11,9 @@ class Player extends AnimationComponent {
 
   Size size;
   DinoStatus dinoStatus = DinoStatus.IDLE;
-  bool canJump = true;
+
+  bool isAirLimit = false;
+  bool isGroundLimit = false;
 
   Animation idleAnimation =
     Animation.sequenced("player/player-idle.png", 4, textureWidth: 64, textureHeight: 64, stepTime: 0.40);
@@ -20,7 +22,7 @@ class Player extends AnimationComponent {
     Animation.sequenced("player/player-run.png", 10, textureWidth: 64, textureHeight: 64, stepTime: 0.05,);
 
   Animation jumpingAnimation =
-    Animation.sequenced("player/player-jump.png", 2, textureWidth: 64, textureHeight: 64, stepTime: 0.50);
+    Animation.sequenced("player/player-jump.png", 2, textureWidth: 64, textureHeight: 64, stepTime: 0.60);
 
   Animation hurtAnimation =
     Animation.sequenced("player/player-hurt.png", 2, textureWidth: 64, textureHeight: 64, stepTime: 0.40);
@@ -42,7 +44,7 @@ class Player extends AnimationComponent {
 
     animation.update(t);
 
-    //print("Y: $y");
+    print(dinoStatus);
 
     if(Game.gameState == GameState.STARTED && dinoStatus == DinoStatus.IDLE){
 
@@ -53,8 +55,7 @@ class Player extends AnimationComponent {
       run();
 
 
-    } else if(Game.gameState == GameState.STARTED && dinoStatus == DinoStatus.JUMPING &&
-        canJump ){
+    } else if(Game.gameState == GameState.STARTED && dinoStatus == DinoStatus.JUMPING){
 
       jump(t);
 
@@ -64,6 +65,8 @@ class Player extends AnimationComponent {
 
   void idle(){
 
+    print("PARADO!");
+
     if(animation != idleAnimation){
       animation = idleAnimation;
     }
@@ -72,9 +75,10 @@ class Player extends AnimationComponent {
 
   void run(){
 
+    print("CORRENDO!");
+
     if(animation != runningAnimation){
       animation = runningAnimation;
-      dinoStatus = DinoStatus.RUNNING;
     }
 
   }
@@ -89,27 +93,32 @@ class Player extends AnimationComponent {
 
     }
 
-    // If the player is touching the ground, move the height to 150
+    double airLimit = (size.height /  2);
+    double groundLimit = (size.height - 118);
 
-    // Decrease the height (y)
-    // When it gets 210 it increases
-    // When it get 242 it stops
+    double jumpSpeed = 100;
 
-    double maxHeight = (size.height - 150);
-    double minHeight = (size.height - 118);
-
-
-   if(y > maxHeight){ // if greater than 210
-     y = y - 30 * dt;
-   }
-   else if(y.toInt() <= maxHeight+2){
-     y = y + 30 * dt;
-     //dinoStatus = DinoStatus.RUNNING;
-   }
+    //print("Y: $y");
+    //print("MAX HEIGHT: $maxHeight");
 
 
+    if(y > airLimit && !isAirLimit){
+      y -= jumpSpeed * dt;
+    } else {
+      isAirLimit = true;
+    }
 
+    if(y >= groundLimit){
+      isGroundLimit = true;
+      isAirLimit = false;
+      isGroundLimit = false;
+      dinoStatus = DinoStatus.RUNNING;
 
+    }
+
+    if(isAirLimit && isGroundLimit == false){
+      y += (jumpSpeed+4) * dt;
+    }
 
   }
 
