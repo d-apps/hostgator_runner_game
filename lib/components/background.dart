@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flame_scrolling_sprite/flame_scrolling_sprite.dart';
+import 'package:hostgator_runner_game/game.dart';
+import 'package:hostgator_runner_game/util/game_state.dart';
 
 class Background extends ScrollingSpriteComponent{
 
@@ -27,6 +29,10 @@ class Background extends ScrollingSpriteComponent{
   void update(double t) {
     scrollingSprite.update(t);
 
+    if(Game.gameState == GameState.GAMEOVER){
+      stop();
+    }
+
     super.update(t);
 
   }
@@ -45,6 +51,15 @@ class Background extends ScrollingSpriteComponent{
   }
 
   void stop(){
+
+    currentSpeed = 0;
+
+    scrollingSprite = ScrollingSprite(
+      spritePath: spritePath,
+      spriteDestHeight: size.height,
+      spriteDestWidth: size.width,
+      horizontalSpeed: currentSpeed,
+    );
 
   }
 

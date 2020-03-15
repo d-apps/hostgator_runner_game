@@ -35,7 +35,6 @@ class Player extends AnimationComponent {
     x = size.width / 9;
     y = size.height -118;
 
-
   }
 
 
@@ -44,7 +43,7 @@ class Player extends AnimationComponent {
 
     animation.update(t);
 
-    print(dinoStatus);
+    //print(dinoStatus);
 
     if(Game.gameState == GameState.STARTED && dinoStatus == DinoStatus.IDLE){
 
@@ -59,13 +58,19 @@ class Player extends AnimationComponent {
 
       jump(t);
 
+    } else if(Game.gameState == GameState.GAMEOVER){
+
+      hurt();
+
     }
+
+
 
   }
 
   void idle(){
 
-    print("PARADO!");
+    //print("PARADO!");
 
     if(animation != idleAnimation){
       animation = idleAnimation;
@@ -75,17 +80,18 @@ class Player extends AnimationComponent {
 
   void run(){
 
-    print("CORRENDO!");
+    //print("CORRENDO!");
 
     if(animation != runningAnimation){
       animation = runningAnimation;
+      y = size.height -118;
     }
 
   }
 
   void jump(double dt){
 
-    print("PULOU!");
+    //print("PULOU!");
 
     if(animation != jumpingAnimation){
 
@@ -93,10 +99,10 @@ class Player extends AnimationComponent {
 
     }
 
-    double airLimit = (size.height /  2);
+    double airLimit = (size.height /  2.5);
     double groundLimit = (size.height - 118);
 
-    double jumpSpeed = 100;
+    double jumpSpeed = 150;
 
     //print("Y: $y");
     //print("MAX HEIGHT: $maxHeight");
@@ -117,7 +123,7 @@ class Player extends AnimationComponent {
     }
 
     if(isAirLimit && isGroundLimit == false){
-      y += (jumpSpeed+4) * dt;
+      y += (jumpSpeed+-10) * dt;
     }
 
   }
@@ -127,6 +133,8 @@ class Player extends AnimationComponent {
     if(animation != hurtAnimation){
       animation = hurtAnimation;
     }
+    
+    
 
   }
 

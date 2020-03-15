@@ -23,6 +23,10 @@ void main() async{
     "player/player-idle.png",
     "player/player-jump.png",
     "player/player-run.png",
+    "enemies/enemy-0.png",
+    "enemies/enemy-1.png",
+    "enemies/enemy-2.png",
+    "enemies/enemy-3.png",
 
   ]);
 

@@ -7,18 +7,21 @@ import 'package:hostgator_runner_game/components/background.dart';
 import 'package:hostgator_runner_game/components/ground.dart';
 import 'package:hostgator_runner_game/components/player.dart';
 import 'package:hostgator_runner_game/util/config.dart';
+import 'package:hostgator_runner_game/util/enemy_creator.dart';
 import 'package:hostgator_runner_game/util/game_state.dart';
 
 
 class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
 
   Size size;
-  Player player;
   Background background1;
   Background background2;
   Background background3;
   Ground ground;
   List<Ground> grounds = [];
+
+  Player player;
+  EnemyCreator enemyCreator;
 
   static GameState gameState = GameState.IDLE;
 
@@ -37,7 +40,6 @@ class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
     add(background3);
 
     // Adding ground
-
     for(int i = 0; i < (size.width / 128); i++){
       grounds.add(ground = Ground(size: size, counter: i.toDouble(), currentSpeed: 0, speed: Config.GROUND_SPEED));
     }
@@ -45,8 +47,10 @@ class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
     // Show ground components
     grounds.forEach((ground)=> add(ground));
 
+    // Add the player
     player = Player(size);
     add(player);
+
 
   }
 
@@ -64,15 +68,45 @@ class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
       background3.move();
       grounds.forEach((ground) => ground.move());
 
+      add(enemyCreator = EnemyCreator());
+
 
       // If the game is started and the player is touching the ground, he can jump
     } else if(gameState == GameState.STARTED && player.height <= Config.GROUND_HEIGHT) {
 
       player.dinoStatus = DinoStatus.JUMPING;
 
+    } else if(gameState == GameState.GAMEOVER){
+
+      reset();
+
     }
 
 
+
+  }
+
+  void reset() async{
+
+    EnemyCreator.enemies.forEach((enemy){
+
+      enemy.destroyed = true;
+
+    });
+
+    enemyCreator.destroyed = true;
+
+    await Future.delayed(Duration(milliseconds: 2));
+
+    gameState = GameState.STARTED;
+    player.dinoStatus = DinoStatus.RUNNING;
+
+    background1.move();
+    background2.move();
+    background3.move();
+    grounds.forEach((ground) => ground.move());
+
+    add(enemyCreator = EnemyCreator());
 
   }
 
