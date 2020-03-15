@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame_scrolling_sprite/flame_scrolling_sprite.dart';
-import 'package:hostgator_runner_game/config.dart';
+import 'package:hostgator_runner_game/util/config.dart';
 
 class Ground extends ScrollingSpriteComponent {
 

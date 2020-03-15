@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:hostgator_runner_game/components/background.dart';
 import 'package:hostgator_runner_game/components/ground.dart';
 import 'package:hostgator_runner_game/components/player.dart';
-import 'package:hostgator_runner_game/config.dart';
-import 'package:hostgator_runner_game/game_state.dart';
+import 'package:hostgator_runner_game/util/config.dart';
+import 'package:hostgator_runner_game/util/game_state.dart';
+
 
 class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
 
@@ -54,25 +55,20 @@ class Game extends BaseGame with HasWidgetsOverlay, TapDetector {
     super.onTap();
 
     if(gameState == GameState.IDLE){
+
       gameState = GameState.STARTED;
+      player.dinoStatus = DinoStatus.RUNNING;
 
       background1.move();
       background2.move();
       background3.move();
       grounds.forEach((ground) => ground.move());
-      player.run();
 
 
       // If the game is started and the player is touching the ground, he can jump
     } else if(gameState == GameState.STARTED && player.height <= Config.GROUND_HEIGHT) {
 
-      //player.jump();
-
-      player.toRect().translate(0, size.height -150);
-
-     //if(player.height >= Config.GROUND_HEIGHT){
-     //   player.run();
-     // }
+      player.dinoStatus = DinoStatus.JUMPING;
 
     }
 
